@@ -1,11 +1,10 @@
-# Retired Sets Trends Radar v1.5
+# Retired Sets Trends Radar v1.6
 
-- Centres the Retired Sets logo and header text.
-- Collector interest is calculated as min(20, round(100 × wantedBy / (ownedBy + 1))) when Brickset provides both counts.
-- If collector counts are missing, displays **Data unavailable**, rather than misleading **0/20**. Missing data contributes zero points to the existing 90-point screening heuristic; categories and thresholds are unchanged.
-- Shows wanted/owned counts when present.
+Changes from v1.5: UK RRP availability no longer influences the opportunity score. Total is now out of 80 (retirement 40, Brickset rating 20, collector interest 20). Labels: Good Investment 58–80; Possible Investment 36–57; Not worth investing 0–35. UK RRP remains displayed as information.
 
 ## Deploy
-Replace `app.py` in your Trends Radar GitHub repository and commit. Existing `logo.png`, `requirements.txt`, `BRICKSET_API_KEY` and Railway start command remain unchanged.
+Replace `app.py` in your existing Trends Radar GitHub repository and commit. Railway will redeploy. No changes to the API key, logo, dependencies or start command are required.
 
-**Note:** Brickset may not supply wanted/owned counts in its `getSets` response. This release makes the absence transparent; it does not invent collector-interest values.
+Start command: `uvicorn app:app --host 0.0.0.0 --port $PORT`
+
+Scores are screening heuristics, not financial forecasts. Missing collector data contributes zero.
