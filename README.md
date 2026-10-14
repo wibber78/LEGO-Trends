@@ -1,10 +1,11 @@
-# Retired Sets Trends Radar v1.4
+# Retired Sets Trends Radar v1.5
 
-Release year is now mandatory. A search scans only the specified release year (up to three Brickset pages by default), rather than four years. Blank or invalid years are rejected in the UI and API.
+- Centres the Retired Sets logo and header text.
+- Collector interest is calculated as min(20, round(100 × wantedBy / (ownedBy + 1))) when Brickset provides both counts.
+- If collector counts are missing, displays **Data unavailable**, rather than misleading **0/20**. Missing data contributes zero points to the existing 90-point screening heuristic; categories and thresholds are unchanged.
+- Shows wanted/owned counts when present.
 
-All v1.3 features remain: official logo, colour-coded investment categories, individual score breakdowns, and up to 20 vertically stacked results. No API usage display or spreadsheet search.
+## Deploy
+Replace `app.py` in your Trends Radar GitHub repository and commit. Existing `logo.png`, `requirements.txt`, `BRICKSET_API_KEY` and Railway start command remain unchanged.
 
-## Deployment
-Replace `app.py`, `logo.png` and `requirements.txt` in your Trends Radar GitHub repository. Keep Railway start command `uvicorn app:app --host 0.0.0.0 --port $PORT` and existing `BRICKSET_API_KEY`.
-
-Searches are cached for six hours per running instance. A cold search may use up to three Brickset `getSets` calls depending on pagination.
+**Note:** Brickset may not supply wanted/owned counts in its `getSets` response. This release makes the absence transparent; it does not invent collector-interest values.
