@@ -1,20 +1,10 @@
-# Retired Sets Trends Radar v1.2
+# Retired Sets Trends Radar v1.4
 
-A standalone FastAPI app for screening LEGO sets approaching retirement.
+Release year is now mandatory. A search scans only the specified release year (up to three Brickset pages by default), rather than four years. Blank or invalid years are rejected in the UI and API.
 
-## Deploy to Railway
+All v1.3 features remain: official logo, colour-coded investment categories, individual score breakdowns, and up to 20 vertically stacked results. No API usage display or spreadsheet search.
 
-1. Upload `app.py` and `requirements.txt` to the separate Trends Radar GitHub repository.
-2. Configure `BRICKSET_API_KEY` in Railway Variables (same key as Price Checker).
-3. Start command: `uvicorn app:app --host 0.0.0.0 --port $PORT`.
-4. Generate a Railway domain pointed to the listening port.
+## Deployment
+Replace `app.py`, `logo.png` and `requirements.txt` in your Trends Radar GitHub repository. Keep Railway start command `uvicorn app:app --host 0.0.0.0 --port $PORT` and existing `BRICKSET_API_KEY`.
 
-## Version 1.2
-
-- Removed Brickset API usage display and endpoint.
-- Added labelled screening bands: **Good Investment** (65–90), **Possible Investment** (40–64), **Not worth investing** (0–39).
-- Returns the top 20 retirement candidates in descending score order, displayed in a single vertical list.
-- No spreadsheet analysis or stock valuation.
-- Results are cached for 6 hours per running application instance.
-
-**Caution:** The categories are heuristic labels requested for convenience, not validated investment recommendations. The app does not measure current resale market prices or predict profits. Always verify purchase cost and recent sold prices before buying.
+Searches are cached for six hours per running instance. A cold search may use up to three Brickset `getSets` calls depending on pagination.
